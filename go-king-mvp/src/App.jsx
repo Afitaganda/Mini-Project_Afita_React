@@ -18,13 +18,13 @@ function App() {
     <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/course-search" element={<CourseSearch/>}/>
-        <Route path="/course-detail" element={<CourseDetail/>}/>
-        <Route path="/AIChat" element={<AIChat/>}/>
+        <Route path="/course-detail/:id" element={<CourseDetail/>}/>
+        <Route path="/ai-chat" element={<AIChat/>}/>
 
         <Route path="/login-admin" element={<LoginAdmin/>}/>
         <Route path="/list-course" element={<ListCourse/>}/>
         <Route path="/create-course" element={<CreateCourse/>}/>
-        <Route path="/edit-course" element={<EditCourse/>}/>
+        <Route path="/edit-course/:id" element={<EditCourse/>}/>
     </Routes>
     </BrowserRouter>
   )
