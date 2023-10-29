@@ -14,7 +14,7 @@ const Navbar = () => {
                 <p onClick={()=> navigate('/ai-chat')} className="cursor-pointer">ChatBox</p>
               </div>
               <div>
-                <button className='bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer' onClick={()=> navigate("course-search")}>Cari Kursus</button>
+                <button className='bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer' onClick={()=> navigate("/course-search")}>Cari Kursus</button>
               </div>
             </div>
         </div>
