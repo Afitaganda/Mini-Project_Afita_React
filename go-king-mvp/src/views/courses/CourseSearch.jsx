@@ -67,7 +67,7 @@ const CourseSearch = () => {
   const list = !isFilterAll ? FilteredData : data
 
   return (
-    <div className="bg-emerald-100 text-stone-800">
+    <div className="bg-emerald-100 text-stone-800 min-h-screen">
       <Navbar />
       <div className="max-w-screen-xl m-auto p-8">
         <div className="flex flex-row items-center justify-between gap-2 mb-8">
@@ -80,7 +80,12 @@ const CourseSearch = () => {
             `}
               onClick={() => {
                 setIsFilterAll(true)
-                setSelectedFilter({})
+                setSelectedFilter({
+                  type: '',
+                  duration: '',
+                  facility: '',
+                  accent: '',
+                })
               }}>
               All
             </div>

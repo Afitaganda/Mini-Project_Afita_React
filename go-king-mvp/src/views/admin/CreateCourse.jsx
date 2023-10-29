@@ -2,11 +2,16 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { API_URL } from '../../data/config'
-import loginChecker from '../../utils/LoginChecker'
 import Swal from 'sweetalert2'
+import useLoginChecker from '../../hooks/useLoginChecker'
 
 const CreateCourse = () => {
   const navigate = useNavigate()
+  const { isLoggedIn } = useLoginChecker()
+
+  useEffect(() => {
+    if (!isLoggedIn) navigate('/login-admin')
+  }, [isLoggedIn, navigate])
 
   const [course, setCourse] = useState({
     title: '',
@@ -17,11 +22,6 @@ const CreateCourse = () => {
     description: '',
     contact: '',
   })
-
-  useEffect(() => {
-    const isLoggedIn = loginChecker()
-    if (!isLoggedIn) navigate('/login-admin')
-  }, [navigate])
 
   const handleSubmit = () => {
     axios.post(`${API_URL}courses`, course).then(() => {
@@ -50,7 +50,7 @@ const CreateCourse = () => {
   };
 
   return (
-    <div className="w-full h-full bg-emerald-100 text-stone-800">
+    <div className="w-full min-h-screen bg-emerald-100 text-stone-800">
       <div className="container h-full m-auto p-4 flex flex-col justify-center">
         <form onSubmit={(e) => {
           e.preventDefault()
@@ -138,21 +138,24 @@ const CreateCourse = () => {
             <textarea
               name="description"
               id="description"
+              value={course.description}
               cols="80"
               rows="5"
               className="bg-slate-50"
-              placeholder="Masukkan deskripsi"></textarea>
+              placeholder="Masukkan deskripsi"
+              onChange={(e) => handleInputChange('description', e.target.value)}
+            ></textarea>
           </div>
           <div className="w-2/4 mb-4">
             <label htmlFor="contact" className="block font-semibold">Nomor WhatsApp Kursus</label>
             <input
-              type="number"
+              type="text"
               className="w-full p-2 border bg-slate-50 border-gray-300 rounded"
               id="contact"
               name="contact"
               placeholder="Gunakan format nomor internasional (62)"
               value={course.contact}
-              onChange={(e) => handleInputChange('contact', e.target.value)}
+              onChange={(e) => handleInputChange('contact', e.target.value, true)}
             />
           </div>
           <button className="mt-4 w-2/4 bg-emerald-600 text-white p-2 rounded hover:bg-emerald-700">Simpan</button>

@@ -30,7 +30,7 @@ const LoginAdmin = () => {
     }
   };
   return (
-    <div className="container bg-emerald-100 mx-auto h-screen flex justify-center items-center">
+    <div className="bg-emerald-100 mx-auto min-w-screen min-h-screen flex justify-center items-center">
       <div className="bg-white md rounded px-8 pt-6 pb-8 mb-4">
         <h1 className="text-3xl font-bold mb-8 text-center">Login</h1>
         <form onSubmit={handleLogin}>

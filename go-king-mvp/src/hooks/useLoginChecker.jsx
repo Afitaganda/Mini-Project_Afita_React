@@ -3,7 +3,7 @@ const useLoginChecker = () => {
 
     if (typeof window != "undefined") {
         const checkLogin = window.localStorage.getItem('isLoggedIn')
-        return (checkLogin === 'true');
+        isLoggedIn = (checkLogin === 'true');
     }
     return {
         isLoggedIn

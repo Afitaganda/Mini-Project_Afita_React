@@ -11,9 +11,6 @@ const Navbar = () => {
               </div>
             <div className="flex w-full items-center justify-end gap-8">
               <div>
-                <p className="cursor-pointer">About Us</p>
-              </div>
-              <div>
                 <p onClick={()=> navigate('/ai-chat')} className="cursor-pointer">ChatBox</p>
               </div>
               <div>

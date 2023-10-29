@@ -2,12 +2,13 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { API_URL } from '../../data/config'
-import loginChecker from '../../utils/LoginChecker'
 import Swal from 'sweetalert2'
+import useLoginChecker from '../../hooks/useLoginChecker'
 
 const EditCourse = () => {
   const location = useLocation()
   const navigate = useNavigate()
+  const { isLoggedIn } = useLoginChecker()
 
   const data = location.state.value
 
@@ -22,9 +23,8 @@ const EditCourse = () => {
   })
 
   useEffect(() => {
-    const isLoggedIn = loginChecker()
     if (!isLoggedIn) navigate('/login-admin')
-  }, [navigate])
+  }, [isLoggedIn, navigate])
 
   const handleSubmit = () => {
     axios.put(`${API_URL}courses/${data.id}`, course).then(() => {
@@ -41,12 +41,19 @@ const EditCourse = () => {
     })
   }
 
-  const handleInputChange = (name, value) => {
-    setCourse({ ...course, [name]: value });
+  const handleInputChange = (name, value, isNumber = false) => {
+    let formValue = ''
+    if (isNumber) {
+      formValue = value.replace(/\D/g, "") //Accept only number, other than number would not be shown
+    } else {
+      formValue = value
+    }
+
+    setCourse({ ...course, [name]: formValue });
   };
 
   return (
-    <div className="w-full h-full bg-emerald-100 text-stone-800">
+    <div className="w-full min-h-screen bg-emerald-100 text-stone-800">
       <div className="container h-full m-auto p-4 flex flex-col justify-center">
         <form onSubmit={(e) => {
           e.preventDefault()
@@ -134,21 +141,24 @@ const EditCourse = () => {
             <textarea
               name="description"
               id="description"
+              value={course.description}
               cols="80"
               rows="5"
               className="bg-slate-50"
-              placeholder="Masukkan deskripsi"></textarea>
+              placeholder="Masukkan deskripsi"
+              onChange={(e) => handleInputChange('description', e.target.value)}
+            ></textarea>
           </div>
           <div className="w-2/4 mb-4">
             <label htmlFor="contact" className="block font-semibold">Nomor WhatsApp Kursus</label>
             <input
-              type="number"
+              type="text"
               className="w-full p-2 border bg-slate-50 border-gray-300 rounded"
               id="contact"
               name="contact"
               placeholder="Gunakan format nomor internasional (62)"
               value={course.contact}
-              onChange={(e) => handleInputChange('contact', e.target.value)}
+              onChange={(e) => handleInputChange('contact', e.target.value, true)}
             />
           </div>
           <button className="mt-4 w-2/4 bg-emerald-600 text-white p-2 rounded hover:bg-emerald-700">Simpan</button>

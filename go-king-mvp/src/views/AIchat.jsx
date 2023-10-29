@@ -32,7 +32,7 @@ const AIchat = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-emerald-100">
+    <div className="flex flex-col min-h-screen bg-emerald-100">
       <Navbar />
       <div className="max-w-screen-xl m-auto p-8 flex items-center justify-center">
         <div className="p-4 bg-white rounded shadow">

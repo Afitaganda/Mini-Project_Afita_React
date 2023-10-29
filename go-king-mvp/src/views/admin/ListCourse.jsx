@@ -21,7 +21,6 @@ const ListCourse = () => {
         })
     }
 
-    console.log(data, 'data')
     useEffect(() => {
         getListCourses()
     }, [])
@@ -55,8 +54,22 @@ const ListCourse = () => {
 
     };
 
+    const handleLogOut = () => {
+        Swal.fire({
+            title: 'Log Out?',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("user");
+                navigate('/login-admin')
+            }
+        })
+    }
+
     return (
-        <div className="bg-emerald-100 flex">
+        <div className="bg-emerald-100 flex min-h-screen">
             <div className="container-left">
                 <div className="flex h-full" id="sidebar">
                     <div className="w-full bg-white text-gray-800 p-4">
@@ -66,6 +79,9 @@ const ListCourse = () => {
                                 <p className="block py-2 px-4 hover:bg-gray-300 font-semibold">
                                     Kursus
                                 </p>
+                            </li>
+                            <li>
+                                <button onClick={handleLogOut}>Log Out</button>
                             </li>
                         </ul>
                     </div>
