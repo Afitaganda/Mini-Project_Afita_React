@@ -11,8 +11,6 @@ const AIchat = () => {
     apiKey: import.meta.env.VITE_OPENAI_KEY,
   });
 
-  console.log(import.meta.env.VITE_OPENAI_KEY);
-
   delete configuration.baseOptions.headers['User-Agent'];
 
   const openai = new OpenAIApi(configuration);
@@ -42,19 +40,21 @@ const AIchat = () => {
           <h1 className="text-xl font-bold mb-4">
             OpenAI Integration with React
           </h1>
-          <textarea
-            className="p-2 w-64 h-24 mb-4 border rounded"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Type your query here..."
-          ></textarea>
-          <button
-            className="p-2 bg-emerald-600 text-white rounded"
-            onClick={() => handleClick()}
-          >
-            Submit
-          </button>
-          <div className="mt-4">
+          <div className="flex justify-between gap-4">
+            <input
+              className="p-2 w-full h-auto mb-4 border bg-slate-50 rounded text-stone-800"
+              value={query}
+              type="text"
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Type your query here..."></input>
+            <button
+              className="p-2 bg-emerald-600 text-white rounded h-10"
+              onClick={() => handleClick()}
+            >
+              Submit
+            </button>
+          </div>
+          <div className="mt-4 text-stone-800">
             <p>
               <strong>Response:</strong>
             </p>
