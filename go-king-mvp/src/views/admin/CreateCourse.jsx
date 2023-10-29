@@ -1,10 +1,13 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { API_URL } from '../../data/config'
 import loginChecker from '../../utils/LoginChecker'
+import Swal from 'sweetalert2'
 
 const CreateCourse = () => {
+  const navigate = useNavigate()
+  
   const [course, setCourse] = useState({
     title: '',
     type: '',
@@ -15,30 +18,42 @@ const CreateCourse = () => {
     contact: '',
   })
 
-  const navigate = useNavigate()
-
     useEffect(() => {
         const isLoggedIn = loginChecker()
         if (!isLoggedIn) navigate('/login-admin')
-    }, [])
+    }, [navigate])
 
   const handleSubmit = () => {
     axios.post(`${API_URL}courses`, course).then((res) =>{
       console.log(res)
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'data berhasil disimpan',
+        showConfirmButton: false,
+        timer: 1500
+      })
       navigate('/list-course')
     }).catch((err) => {
       console.error(err);
     })
   }
 
-  const handleInputChange = (name, value) => {
-    setCourse({ ...course, [name]: value });
+  const handleInputChange = (name, value, isNumber = false) => {
+    let formValue = ''
+    if (isNumber) {
+      formValue = value.replace(/\D/g, "") //Accept only number, other than number would not be shown
+    } else {
+      formValue = value
+    }
+
+    setCourse({ ...course, [name]: formValue });
   };
 
   console.log(course)
 
   return (
-    <div className="w-full h-screen bg-emerald-100 text-stone-800">
+    <div className="w-full h-full bg-emerald-100 text-stone-800">
       <div className="container h-full m-auto p-4 flex flex-col justify-center">
         <form onSubmit={(e) => {
           e.preventDefault()
@@ -120,15 +135,24 @@ const CreateCourse = () => {
               <option value="Mandarin">Mandarin</option>
             </select>
           </div>
-
+          <div className="w-2/4 mb-4 flex flex-col">
+          <label htmlFor="description" className="block font-semibold">Deskripsi</label>
+          <textarea
+          name="description" 
+          id="description" 
+          cols="80" 
+          rows="5"
+          className="bg-slate-50"
+          placeholder="Masukkan deskripsi"></textarea>
+          </div>
           <div className="w-2/4 mb-4">
             <label htmlFor="contact" className="block font-semibold">Nomor WhatsApp Kursus</label>
             <input
-              type="text"
+              type="number"
               className="w-full p-2 border bg-slate-50 border-gray-300 rounded"
               id="contact"
               name="contact"
-              placeholder="Gunakan format wa.me/<>"
+              placeholder="Gunakan format nomor internasional (62)"
               value={course.contact}
               onChange={(e) => handleInputChange('contact', e.target.value)}
             />
