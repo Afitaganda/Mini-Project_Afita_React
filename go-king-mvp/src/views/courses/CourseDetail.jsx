@@ -8,8 +8,6 @@ const CourseDetail = () => {
   const courseData = location.state.value
   const whatsappLink = `https://wa.me/${courseData.contact.trim()}`
 
-  console.log(whatsappLink);
-
   const handleBack = () => {
     navigate('/course-search');
   };

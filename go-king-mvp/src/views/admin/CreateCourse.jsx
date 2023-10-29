@@ -7,7 +7,7 @@ import Swal from 'sweetalert2'
 
 const CreateCourse = () => {
   const navigate = useNavigate()
-  
+
   const [course, setCourse] = useState({
     title: '',
     type: '',
@@ -18,14 +18,13 @@ const CreateCourse = () => {
     contact: '',
   })
 
-    useEffect(() => {
-        const isLoggedIn = loginChecker()
-        if (!isLoggedIn) navigate('/login-admin')
-    }, [navigate])
+  useEffect(() => {
+    const isLoggedIn = loginChecker()
+    if (!isLoggedIn) navigate('/login-admin')
+  }, [navigate])
 
   const handleSubmit = () => {
-    axios.post(`${API_URL}courses`, course).then((res) =>{
-      console.log(res)
+    axios.post(`${API_URL}courses`, course).then(() => {
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -50,14 +49,13 @@ const CreateCourse = () => {
     setCourse({ ...course, [name]: formValue });
   };
 
-  console.log(course)
-
   return (
     <div className="w-full h-full bg-emerald-100 text-stone-800">
       <div className="container h-full m-auto p-4 flex flex-col justify-center">
         <form onSubmit={(e) => {
           e.preventDefault()
-          handleSubmit()}}
+          handleSubmit()
+        }}
           className="flex flex-col justify-center items-center">
           <h1 className="text-2xl font-bold mb-4">Tambah Data Kursus</h1>
           <div className="w-2/4 mb-4">
@@ -136,14 +134,14 @@ const CreateCourse = () => {
             </select>
           </div>
           <div className="w-2/4 mb-4 flex flex-col">
-          <label htmlFor="description" className="block font-semibold">Deskripsi</label>
-          <textarea
-          name="description" 
-          id="description" 
-          cols="80" 
-          rows="5"
-          className="bg-slate-50"
-          placeholder="Masukkan deskripsi"></textarea>
+            <label htmlFor="description" className="block font-semibold">Deskripsi</label>
+            <textarea
+              name="description"
+              id="description"
+              cols="80"
+              rows="5"
+              className="bg-slate-50"
+              placeholder="Masukkan deskripsi"></textarea>
           </div>
           <div className="w-2/4 mb-4">
             <label htmlFor="contact" className="block font-semibold">Nomor WhatsApp Kursus</label>

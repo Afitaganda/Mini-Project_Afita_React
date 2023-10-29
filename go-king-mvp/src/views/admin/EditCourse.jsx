@@ -27,8 +27,7 @@ const EditCourse = () => {
   }, [navigate])
 
   const handleSubmit = () => {
-    axios.put(`${API_URL}courses/${data.id}`, course).then((res) => {
-      console.log(res)
+    axios.put(`${API_URL}courses/${data.id}`, course).then(() => {
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -45,8 +44,6 @@ const EditCourse = () => {
   const handleInputChange = (name, value) => {
     setCourse({ ...course, [name]: value });
   };
-
-  console.log(course)
 
   return (
     <div className="w-full h-full bg-emerald-100 text-stone-800">
