@@ -1,5 +1,5 @@
 // import { useState } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import './views/App.css'
 
 import Home from './views/Home'
@@ -14,19 +14,19 @@ import AIChat from './views/AIchat'
 function App() {
 
   return (
-    <BrowserRouter>
-    <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/course-search" element={<CourseSearch/>}/>
-        <Route path="/course-detail/:id" element={<CourseDetail/>}/>
-        <Route path="/ai-chat" element={<AIChat/>}/>
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/course-search" element={<CourseSearch />} />
+        <Route path="/course-detail/:id" element={<CourseDetail />} />
+        <Route path="/ai-chat" element={<AIChat />} />
 
-        <Route path="/login-admin" element={<LoginAdmin/>}/>
-        <Route path="/list-course" element={<ListCourse/>}/>
-        <Route path="/create-course" element={<CreateCourse/>}/>
-        <Route path="/edit-course/:id" element={<EditCourse/>}/>
-    </Routes>
-    </BrowserRouter>
+        <Route path="/login-admin" element={<LoginAdmin />} />
+        <Route path="/list-course" element={<ListCourse />} />
+        <Route path="/create-course" element={<CreateCourse />} />
+        <Route path="/edit-course/:id" element={<EditCourse />} />
+      </Routes>
+    </HashRouter>
   )
 }
 
