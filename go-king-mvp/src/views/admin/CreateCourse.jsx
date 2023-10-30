@@ -49,6 +49,10 @@ const CreateCourse = () => {
     setCourse({ ...course, [name]: formValue });
   };
 
+  const handleBack = () => {
+    navigate('/list-course');
+  };
+
   return (
     <div className="w-full min-h-screen bg-emerald-100 text-stone-800">
       <div className="container h-full m-auto p-4 flex flex-col justify-center">
@@ -158,7 +162,13 @@ const CreateCourse = () => {
               onChange={(e) => handleInputChange('contact', e.target.value, true)}
             />
           </div>
-          <button className="mt-4 w-2/4 bg-emerald-600 text-white p-2 rounded hover:bg-emerald-700">Simpan</button>
+          <button className="my-4 w-2/4 bg-emerald-600 text-white p-2 rounded hover:bg-emerald-700">Simpan</button>
+          <button
+            onClick={handleBack}
+            className="bg-white hover:bg-slate-50 text-emerald-600 border border-emerald-600 font-bold py-2 px-4 w-2/4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Back to Courses
+          </button>
         </form>
       </div>
     </div>
