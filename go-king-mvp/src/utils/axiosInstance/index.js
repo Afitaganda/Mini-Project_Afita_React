@@ -2,34 +2,30 @@ import axios from "axios";
 import { API_URL } from "../../data/config";
 
 export const AXIOS = axios.create({
-    baseURL: API_URL,
+  baseURL: API_URL,
 });
 
 
-export const useAxiosGet = (endpoint, config) =>
-  AXIOS.get(endpoint, config);
+export const axiosGet = (endpoint) =>
+  AXIOS.get(endpoint);
 
-export const useAxiosGetId = (
+export const axiosGetId = (
   endpoint,
   id,
-  config
-) => AXIOS.get(`${endpoint}/${id}`, config);
+) => AXIOS.get(`${endpoint}/${id}`);
 
-export const useAxiosPost = (
+export const axiosPost = (
   endpoint,
   data,
-  config
-) => AXIOS.post(endpoint, data, config);
+) => AXIOS.post(endpoint, data);
 
-export const useAxiosPut = (
+export const axiosPut = (
   endpoint,
   id,
   data,
-  config
-) => AXIOS.put(`${endpoint}/${id}`, data, config);
+) => AXIOS.put(`${endpoint}/${id}`, data);
 
-export const useAxiosDelete = (
+export const axiosDelete = (
   endpoint,
   id,
-  config
-) => AXIOS.delete(`${endpoint}/${id}`, config);
+) => AXIOS.delete(`${endpoint}/${id}`);

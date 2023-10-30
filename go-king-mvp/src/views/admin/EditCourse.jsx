@@ -1,15 +1,11 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { API_URL } from '../../data/config'
 import Swal from 'sweetalert2'
 import useLoginChecker from '../../hooks/useLoginChecker'
+import { axiosPut } from '../../utils/axiosInstance'
 
 const EditCourse = () => {
   const location = useLocation()
-  const navigate = useNavigate()
-  const { isLoggedIn } = useLoginChecker()
-
   const data = location.state.value
 
   const [course, setCourse] = useState({
@@ -22,12 +18,17 @@ const EditCourse = () => {
     contact: data.contact,
   })
 
+  const { isLoggedIn } = useLoginChecker()
+
+  const navigate = useNavigate()
+
+
   useEffect(() => {
     if (!isLoggedIn) navigate('/login-admin')
   }, [isLoggedIn, navigate])
 
   const handleSubmit = () => {
-    axios.put(`${API_URL}courses/${data.id}`, course).then(() => {
+    axiosPut("courses", data.id, course).then(() => {
       Swal.fire({
         position: 'top-end',
         icon: 'success',

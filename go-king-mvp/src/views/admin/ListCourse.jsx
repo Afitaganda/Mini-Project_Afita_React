@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { API_URL, ENDPOINT } from '../../data/config'
-import { AXIOS } from '../../utils/axiosInstance'
+import { axiosGet } from '../../utils/axiosInstance'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import useLoginChecker from '../../hooks/useLoginChecker'
@@ -16,7 +16,8 @@ const ListCourse = () => {
   }, [isLoggedIn, navigate])
 
   const getListCourses = () => {
-    AXIOS.get(ENDPOINT.COURSES).then((res) => {
+    // eslint-disable-next-line no-undef
+    axiosGet(ENDPOINT.COURSES).then((res) => {
       setData(res.data)
     })
   }
