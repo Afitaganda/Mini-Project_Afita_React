@@ -1,4 +1,4 @@
-import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './views/App.css'
 
 import Home from './views/Home'
@@ -13,7 +13,7 @@ import AIChat from './views/AIchat'
 function App() {
 
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/course-search" element={<CourseSearch />} />
@@ -25,7 +25,7 @@ function App() {
         <Route path="/create-course" element={<CreateCourse />} />
         <Route path="/edit-course/:id" element={<EditCourse />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   )
 }
 
