@@ -1,5 +1,4 @@
-// import { useState } from 'react'
-import { HashRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom'
 import './views/App.css'
 
 import Home from './views/Home'
